@@ -1,4 +1,12 @@
 {
   "@@locale": "vi",
-  "login": "Đăng nhập"
+  "login": "Đăng nhập",
+  "email": "Email",
+  "password": "Mật khẩu",
+  "forgotPassword": "Quên mật khẩu",
+  "doesNotHaveAccount": "Không có tài khoản?",
+  "register": "Đăng ký",
+  "displayName": "Tên hiển thị",
+  "doesHaveAccount": "Có tài khoản ?",
+  "termsAndCondition": "Khi bạn nhấn đăng nhập mặc định được coi là đồng ý với Chính sách bảo mật cùng Điều khoản và điều kiện"
 }

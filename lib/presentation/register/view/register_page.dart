@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import '../bloc/register_bloc.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
-
-
+  static const String routeName = '/register';
 
   @override
   Widget build(BuildContext context) {

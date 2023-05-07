@@ -1,18 +1,22 @@
+import 'package:economic/config/themeManager.dart';
 import 'package:economic/config/localeProvider.dart';
 import 'package:economic/config/themeProvider.dart';
 import 'package:economic/data/repository/user_repository/user_repository.dart';
 import 'package:economic/l10n/l10n.dart';
 import 'package:economic/presentation/register/bloc/register_bloc.dart';
+import 'package:economic/presentation/view/splash_page.dart';
+import 'package:economic/presentation/view/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-
 import '../../common/route.dart';
 import '../../data/repository/authentication_repository/authentication_repository.dart';
 import '../authentication/bloc/authentication_bloc.dart';
 import '../authentication/bloc/authentication_state.dart';
+import '../login/view/login_page.dart';
+import 'home.dart';
 
 class App extends StatefulWidget {
   const App(
@@ -79,24 +83,8 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           title: 'Dynamic Theme Demo',
           themeMode: themeObject.mode,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.blue[600],
-            accentColor: Colors.amber[700],
-            brightness: Brightness.light,
-            backgroundColor: Colors.grey[100],
-            fontFamily: 'Karla',
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          darkTheme: ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.blue[300],
-            accentColor: Colors.amber,
-            brightness: Brightness.dark,
-            backgroundColor: Colors.grey[900],
-            fontFamily: 'Karla',
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
+          theme: ThemeManager.lightTheme,
+          darkTheme: ThemeManager.darkTheme,
           locale: localeProvider.locale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -108,20 +96,22 @@ class _AppState extends State<App> {
           // localizationsDelegate:const [],
           onGenerateRoute: (_) => splashRoute(),
           navigatorKey: _navigatorKey,
+          routes: routes,
           builder: (context, child) {
             return BlocListener<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
                 switch (state.status) {
                   case AuthenticationStatus.authenticated:
-                    _navigator.push(homePageRoute());
+                    _navigator.pushNamedAndRemoveUntil(HomePage.routeName,(route) => false,);
                     break;
                   case AuthenticationStatus.unauthenticated:
-                    _navigator.pushAndRemoveUntil(
-                      loginRoute(),
+                    _navigator.pushNamedAndRemoveUntil(
+                      SplashPage.routeName,
                       (route) => false,
                     );
                     break;
                   case AuthenticationStatus.unknown:
+                    _navigator.pushNamed(SplashPage.routeName);
                     break;
                 }
               },

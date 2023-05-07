@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../common/Contants/common.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  static const String routeName = '/index';
 
   final userBox = Hive.box(AUTHENTICATION_BOX);
 

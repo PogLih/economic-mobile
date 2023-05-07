@@ -51,7 +51,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     bool rs = false;
-    if (state.status.isValidated) {
+    if (!state.status.isInvalid) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
           rs = await _authenticationRepositoryImpl.logIn(

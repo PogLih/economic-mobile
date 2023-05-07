@@ -17,7 +17,13 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
-      (status) => add(AuthenticationStatusChanged(status)),
+      (status)  {
+        try{
+          add(AuthenticationStatusChanged(status));
+        }catch(e){
+          print(e);
+        }
+      },
     );
   }
 

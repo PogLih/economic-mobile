@@ -5,8 +5,6 @@ import 'package:economic/data/repository/authentication_repository/authenticatio
 import 'package:economic/data/repository/user_repository/user_repository.dart';
 import 'package:economic/presentation/view/app.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:economic/common/Contants/common.dart';
 import 'config/CustomHttp.dart';
 
 

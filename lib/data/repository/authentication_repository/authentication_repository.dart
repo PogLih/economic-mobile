@@ -1,47 +1,46 @@
 import 'dart:async';
 import 'dart:convert' as convert;
+
+import 'package:economic/common/contants/common.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../common/contants/api.dart';
-import 'package:http/http.dart' as http;
-import 'package:economic/common/Contants/common.dart';
+import '../../../utils/url_utils.dart';
+
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
   final userBox = Hive.box(AUTHENTICATION_BOX);
-  @override
+
   Stream<AuthenticationStatus> get status async* {
-    await Future<void>.delayed(const Duration(seconds: 1));
     yield AuthenticationStatus.unauthenticated;
     yield* _controller.stream;
   }
 
-  @override
   Future<bool> logIn({
     required String username,
     required String password,
   }) async {
-    var url = Uri.https(USER_SERVICE_BASE_URL,SIGN_IN_API);
-    var obj = {
-      EMAIL: username,
-      PASSWORD: password
-    };
+    Uri url = UrlUtils.getUrl(SIGN_IN_API);
+    var obj = {EMAIL: username, PASSWORD: password};
     var jsonBody = convert.jsonEncode(obj);
-    var response = await http.post(url, headers: HEADER, body:jsonBody);
-    if(response.statusCode == 200) {
-      userBox.put(EMAIL, username);
+    var response = await http.post(url, headers: HEADER, body: jsonBody);
+    var jsonResponse =
+        convert.jsonDecode(response.body) as Map<String, dynamic>;
+    if (response.statusCode == 200) {
+      _controller.add(AuthenticationStatus.authenticated);
+      userBox.put(TOKEN, jsonResponse["data"]["jwt"]);
       return true;
-    }
-    else
+    } else
       return false;
   }
 
-  @override
   void logOut() {
+    userBox.clear();
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
-  @override
   void dispose() => _controller.close();
 }

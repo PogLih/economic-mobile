@@ -9,7 +9,8 @@ import '../../../data/models/user.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({required UserRepository userRepository})
-      : _userRepository = userRepository,super(RegisterState()){
+      : _userRepository = userRepository,
+        super(RegisterState()) {
     on<RegisterUsernameChanged>(_onUsernameChanged);
     on<RegisterPasswordChanged>(_onPasswordChanged);
     on<RegisterDisplayNameChanged>(_onDisplayNameChanged);
@@ -19,9 +20,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
 
   void _onUsernameChanged(
-      RegisterUsernameChanged event,
-      Emitter<RegisterState> emit,
-      ) {
+    RegisterUsernameChanged event,
+    Emitter<RegisterState> emit,
+  ) {
     final username = Username.dirty(event.username);
     emit(
       state.copyWith(
@@ -32,9 +33,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _onPasswordChanged(
-      RegisterPasswordChanged event,
-      Emitter<RegisterState> emit,
-      ) {
+    RegisterPasswordChanged event,
+    Emitter<RegisterState> emit,
+  ) {
     final password = Password.dirty(event.password);
     emit(
       state.copyWith(
@@ -45,32 +46,35 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _onDisplayNameChanged(
-      RegisterDisplayNameChanged event,
-      Emitter<RegisterState> emit,
-      ) {
+    RegisterDisplayNameChanged event,
+    Emitter<RegisterState> emit,
+  ) {
     final displayName = DisplayName.dirty(event.displayName);
     emit(
       state.copyWith(
         displayName: displayName,
-        status: Formz.validate([displayName, state.displayName]),
+        status: Formz.validate([displayName]),
       ),
     );
   }
 
   Future<bool> _onSubmitted(
-      RegisterSubmitted event,
-      Emitter<RegisterState> emit,
-      ) async {
-    if (state.status.isValidated) {
+    RegisterSubmitted event,
+    Emitter<RegisterState> emit,
+  ) async {
+    if (!state.status.isInvalid) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         User? rs = await _userRepository.registerUser(
           username: state.username.value,
           password: state.password.value,
           displayname: state.displayName.value,
-        ) ;
-        if (rs != User.empty)
-          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        );
+        // if (rs != User.empty) {
+        //   emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        // }else{
+          emit(state.copyWith(status: FormzStatus.submissionFailure));
+        // }
       } catch (ex) {
         print(ex.toString());
         emit(state.copyWith(status: FormzStatus.submissionFailure));

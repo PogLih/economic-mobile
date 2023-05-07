@@ -1,126 +1,160 @@
-import 'package:economic/common/route.dart';
+import 'package:economic/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
+import '../bloc/login_state.dart';
 
-import '../bloc/login_state.dart';class LoginForm extends StatelessWidget {
+class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     TextEditingController nameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Consumer<LoginBloc>(
-      builder: (ctx, bloc, child) =>
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: BlocConsumer<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if(state.status == FormzStatus.submissionSuccess ){
-                  Navigator.of(context).push(homePageRoute());
-                }
-                if(state.status == FormzStatus.submissionFailure) {
-
-                }
-              },
+      builder: (ctx, bloc, child) => Padding(
+        padding: const EdgeInsets.all(10),
+        child: BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state.status == FormzStatus.submissionFailure) {
+              UI_utils.showSnackBar(context);
+            }
+          },
+          builder: (context, state) {
+            return BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
-                return BlocBuilder<LoginBloc, LoginState>(
-                  builder: (context, state) {
-                    return ListView(
-                      children: <Widget>[
-                        Container(
-                          child: Image.asset('assets/logo-no-background.png'),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10),
-                          child: const Text(
-                            'Sign in',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 30),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10),
-                          child: TextField(
-                            onChanged: (username) {
-                              context
-                                  .read<LoginBloc>()
-                                  .add(LoginUsernameChanged(username));
-                            },
-                            controller: nameController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'User Name',
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Hello there',
+                              style: TextStyle(
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 30),
                             ),
-                          ),
+                            Icon(
+                              Icons.waving_hand,
+                              color: theme.colorScheme.primary,
+                            )
+                          ],
                         ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: TextField(
-                            onChanged: (password) {
-                              context
-                                  .read<LoginBloc>()
-                                  .add(LoginPasswordChanged(password));
-                            },
-                            obscureText: true,
-                            controller: passwordController,
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
-                            ),
-                          ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          'Please enter username/email and password to sign in',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                              color: Colors.black, fontWeight: FontWeight.w400),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            //forgot password screen
-                          },
-                          child: const Text(
-                            'Forgot Password',
-                          ),
-                        ),
-                        Container(
-                            height: 50,
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: ElevatedButton(
-                              child: Text(AppLocalizations.of(context)!.login),
-                              onPressed: () {
-                                context.read<LoginBloc>().add(
-                                    const LoginSubmitted());
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  AppLocalizations.of(context)!.email,
+                                  style: TextStyle(color: Colors.black),
+                                )),
+                            TextField(
+                              style: TextStyle(color: Colors.black),
+                              onChanged: (username) {
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginUsernameChanged(username));
                               },
-                            )),
-                        Container(
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                // labelText: AppLocalizations.of(context)!.email,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                AppLocalizations.of(context)!.password,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            TextField(
+                              style: TextStyle(color: Colors.black),
+                              onChanged: (password) {
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginPasswordChanged(password));
+                              },
+                              obscureText: true,
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                // labelText: AppLocalizations.of(context)!.password,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          //forgot password screen
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.forgotPassword,
+                        ),
+                      ),
+                      Expanded(
+                          child: Align(
+                        // alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Text('Does not have account?'),
-                              TextButton(
-                                child: const Text(
-                                  'Sign in',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                      registerRoute()
-                                  );
-                                },
-                              )
+                            children: [
+                              const Icon(
+                                (Icons.login),
+                                color: Colors.white,
+                              ),
+                              Text(
+                                AppLocalizations.of(context)!.login,
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ],
                           ),
-                        )
-                      ],
-                    );
-                  },
+                          onPressed: () {
+                            context
+                                .read<LoginBloc>()
+                                .add(const LoginSubmitted());
+                          },
+                        ),
+                      )),
+                    ],
+                  ),
                 );
               },
-            ),
-          ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

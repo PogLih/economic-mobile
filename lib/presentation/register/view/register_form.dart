@@ -1,16 +1,23 @@
 import 'package:economic/common/route.dart';
+import 'package:economic/presentation/login/view/login_page.dart';
 import 'package:economic/presentation/register/bloc/register_event.dart';
+import 'package:economic/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/register_bloc.dart';
 import '../bloc/register_state.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
 
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
@@ -23,10 +30,12 @@ class RegisterForm extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: BlocConsumer<RegisterBloc, RegisterState>(
                 listener: (context, state) {
-                  if(state == FormzStatus.submissionSuccess){
-                    Navigator.of(context).push(loginRoute()
-                    );
-                  }
+                  // if(state.status == FormzStatus.submissionSuccess){
+                  //   Navigator.of(context).pushNamed(LoginPage.routeName
+                  //   );
+                  // }else if(state.status == FormzStatus.submissionFailure){
+                    UI_utils.showErrorFlushBar(context,'a');
+                  // }
                 },
                 builder: (context, state) {
                   return BlocBuilder<RegisterBloc, RegisterState>(
@@ -34,14 +43,15 @@ class RegisterForm extends StatelessWidget {
                       return ListView(
                         children: <Widget>[
                           Container(
-                            child: Image.asset('assets/logo-no-background.png'),
+                            height: MediaQuery.of(context).size.height/4,
+                            child: Image.asset('assets/dragon-icon.png'),
                           ),
                           Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(10),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
+                            child:  Text(
+                              AppLocalizations.of(context)!.register,
+                              style: const TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 30),
@@ -57,14 +67,14 @@ class RegisterForm extends StatelessWidget {
                                     .add(RegisterUsernameChanged(username));
                               },
                               controller: nameController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'User Name',
+                                labelText: AppLocalizations.of(context)!.email,
                               ),
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            padding: const EdgeInsets.all(10),
                             child: TextField(
                               onChanged: (password) {
                                 context
@@ -73,9 +83,9 @@ class RegisterForm extends StatelessWidget {
                               },
                               obscureText: true,
                               controller: passwordController,
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Password',
+                                labelText: AppLocalizations.of(context)!.password,
                               ),
                             ),
                           ),
@@ -90,17 +100,24 @@ class RegisterForm extends StatelessWidget {
                                     RegisterDisplayNameChanged(displayname));
                               },
                               controller: displayNameController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Display Name',
+                                labelText: AppLocalizations.of(context)!.displayName,
                               ),
                             ),
                           ),
                           Container(
                               height: 50,
+                              margin: const EdgeInsets.fromLTRB(0,10,0,0),
                               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: ElevatedButton(
-                                child: const Text('Register'),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.app_registration_sharp),
+                                    Text(AppLocalizations.of(context)!.register,style: TextStyle(fontSize: 20),),
+                                  ],
+                                ),
                                 onPressed: () {
                                   context
                                       .read<RegisterBloc>()
@@ -108,14 +125,20 @@ class RegisterForm extends StatelessWidget {
                                 },
                               )),
                           Container(
-                            child: TextButton(
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(loginRoute());
-                              },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(AppLocalizations.of(context)!.doesHaveAccount),
+                                TextButton(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.login,
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(LoginPage.routeName);
+                                  },
+                                ),
+                              ],
                             ),
                           )
                         ],

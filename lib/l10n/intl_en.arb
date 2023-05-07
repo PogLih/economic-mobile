@@ -1,4 +1,12 @@
 {
   "@@locale": "en",
-  "login": "Login"
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot password",
+  "doesNotHaveAccount": "Does not have account ?",
+  "register": "Register",
+  "displayName": "Display Name",
+  "doesHaveAccount": "Does have account ?",
+  "termsAndCondition": "When you click login, the default is deemed to agree to the Privacy Policy and Terms and Conditions"
 }
