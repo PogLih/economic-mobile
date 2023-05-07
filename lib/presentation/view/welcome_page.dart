@@ -1,5 +1,8 @@
+import 'package:economic/presentation/login/view/login_page.dart';
+import 'package:economic/presentation/register/view/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WelcomePage extends StatelessWidget {
   static const String routeName = '/welcome';
 
@@ -47,38 +50,46 @@ class WelcomePage extends StatelessWidget {
                 flex: 1,
                 // child: Align(
                 //     alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(50, 0, 50, 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    padding: EdgeInsets.all(10),
-                                    minimumSize: const Size.fromHeight(50)),
-                                onPressed: () {},
-                                child:  Text(AppLocalizations.of(context)!.login)),
-                          ),SizedBox(height: 20,),
-                          Flexible(
-                            child: OutlinedButton(
-                                style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    padding: EdgeInsets.all(10),
-                                    minimumSize: const Size.fromHeight(50)),
-                                onPressed: () {},
-                                child:  Text(AppLocalizations.of(context)!.register)),
-                          )
-                        ],
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(50, 0, 50, 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                padding: EdgeInsets.all(10),
+                                minimumSize: const Size.fromHeight(50)),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(LoginPage.routeName);
+                            },
+                            child: Text(AppLocalizations.of(context)!.login)),
                       ),
-                    )
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Flexible(
+                        child: OutlinedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                padding: EdgeInsets.all(10),
+                                minimumSize: const Size.fromHeight(50)),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(RegisterPage.routeName);
+                            },
+                            child:
+                                Text(AppLocalizations.of(context)!.register)),
+                      )
+                    ],
+                  ),
+                )
                 // )
-            )
+                )
           ]),
     );
   }

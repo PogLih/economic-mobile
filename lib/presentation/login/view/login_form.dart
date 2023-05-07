@@ -54,13 +54,14 @@ class LoginForm extends StatelessWidget {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        margin: EdgeInsets.only(bottom: 10),
+                        margin: const EdgeInsets.only(bottom: 10),
                         child: Text(
                           'Please enter username/email and password to sign in',
                           style: theme.textTheme.labelLarge?.copyWith(
                               color: Colors.black, fontWeight: FontWeight.w400),
                         ),
                       ),
+                      const SizedBox(height: 20),
                       Container(
                         alignment: Alignment.center,
                         child: Column(
@@ -69,17 +70,17 @@ class LoginForm extends StatelessWidget {
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   AppLocalizations.of(context)!.email,
-                                  style: TextStyle(color: Colors.black),
+                                  style: const TextStyle(color: Colors.black),
                                 )),
                             TextField(
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                               onChanged: (username) {
                                 context
                                     .read<LoginBloc>()
                                     .add(LoginUsernameChanged(username));
                               },
                               controller: nameController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: UnderlineInputBorder(),
                                 // labelText: AppLocalizations.of(context)!.email,
                               ),
@@ -87,33 +88,31 @@ class LoginForm extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Container(
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                AppLocalizations.of(context)!.password,
-                                style: TextStyle(color: Colors.black),
-                              ),
+                      const SizedBox(height: 20),
+                      Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              AppLocalizations.of(context)!.password,
+                              style: const TextStyle(color: Colors.black),
                             ),
-                            TextField(
-                              style: TextStyle(color: Colors.black),
-                              onChanged: (password) {
-                                context
-                                    .read<LoginBloc>()
-                                    .add(LoginPasswordChanged(password));
-                              },
-                              obscureText: true,
-                              controller: passwordController,
-                              decoration: InputDecoration(
-                                border: UnderlineInputBorder(),
-                                // labelText: AppLocalizations.of(context)!.password,
-                              ),
+                          ),
+                          TextField(
+                            style: const TextStyle(color: Colors.black),
+                            onChanged: (password) {
+                              context
+                                  .read<LoginBloc>()
+                                  .add(LoginPasswordChanged(password));
+                            },
+                            obscureText: true,
+                            controller: passwordController,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              // labelText: AppLocalizations.of(context)!.password,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       TextButton(
                         onPressed: () {

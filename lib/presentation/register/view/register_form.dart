@@ -27,7 +27,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return Consumer<RegisterBloc>(
         builder: (ctx, bloc, child) =>
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: BlocConsumer<RegisterBloc, RegisterState>(
                 listener: (context, state) {
                   // if(state.status == FormzStatus.submissionSuccess){
@@ -42,7 +42,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     builder: (context, state) {
                       return ListView(
                         children: <Widget>[
-                          Container(
+                          SizedBox(
                             height: MediaQuery.of(context).size.height/4,
                             child: Image.asset('assets/dragon-icon.png'),
                           ),
@@ -61,6 +61,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(10),
                             child: TextField(
+                              style: const TextStyle(color: Colors.black),
                               onChanged: (username) {
                                 context
                                     .read<RegisterBloc>()
@@ -76,6 +77,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           Container(
                             padding: const EdgeInsets.all(10),
                             child: TextField(
+                              style: const TextStyle(color: Colors.black),
                               onChanged: (password) {
                                 context
                                     .read<RegisterBloc>()
@@ -84,7 +86,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               obscureText: true,
                               controller: passwordController,
                               decoration:  InputDecoration(
-                                border: OutlineInputBorder(),
+                                border: const OutlineInputBorder(),
                                 labelText: AppLocalizations.of(context)!.password,
                               ),
                             ),
@@ -93,6 +95,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(10),
                             child: TextField(
+                              style: const TextStyle(color: Colors.black),
                               onChanged: (displayname) {
                                 context
                                     .read<RegisterBloc>()
@@ -101,7 +104,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               },
                               controller: displayNameController,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                                border: const OutlineInputBorder(),
                                 labelText: AppLocalizations.of(context)!.displayName,
                               ),
                             ),

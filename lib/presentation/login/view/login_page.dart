@@ -12,7 +12,17 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(foregroundColor: Colors.black,backgroundColor: Theme.of(context).colorScheme.primary,elevation: 0,),
+      appBar: AppBar(
+        foregroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Provider<LoginBloc>.value(
         value: LoginBloc(
             authenticationRepository:
