@@ -1,5 +1,4 @@
-import 'package:economic/config/themeProvider.dart';
-import 'package:economic/presentation/view/widget/languageWidget.dart';
+import 'package:economic/config/theme/themeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -7,6 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../common/Contants/common.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../widget/languageWidget.dart';
 class HomePage extends StatelessWidget {
   static const String routeName = '/index';
 

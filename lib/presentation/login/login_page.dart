@@ -1,10 +1,12 @@
-import 'package:economic/presentation/login/bloc/login_bloc.dart';
-import 'package:economic/presentation/login/view/login_form.dart';
+
+import 'package:economic/presentation/login/login_form.dart';
+import 'package:economic/widget/responsiveLayout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/repository/authentication_repository/authentication_repository.dart';
+import '../../blocs/login/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = '/login';
@@ -27,7 +29,7 @@ class LoginPage extends StatelessWidget {
         value: LoginBloc(
             authenticationRepository:
                 RepositoryProvider.of<AuthenticationRepository>(context)),
-        child: const LoginForm(),
+        child:  LoginForm(),
       ),
     );
   }

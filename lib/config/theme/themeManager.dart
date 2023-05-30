@@ -9,7 +9,7 @@ class ThemeManager {
       textTheme: TextTheme(
           labelLarge: TextStyle(
               fontFamily: font,
-              color: secondaryColor,
+              color: primaryColor,
               fontWeight: FontWeight.w700),
           headlineMedium: TextStyle(
               fontFamily: font,
@@ -25,7 +25,7 @@ class ThemeManager {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: primaryColor,
-    accentColor: secondaryColor,
+    // accentColor: secondaryColor,
     textTheme: TextTheme(
       bodyText1: TextStyle(
         color: Colors.white,

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:economic/presentation/login/view/login_page.dart';
-import 'package:economic/presentation/view/welcome_page.dart';
 import 'package:flutter/material.dart';
+
+import '../welcome/welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
   static const String routeName = '/loading';
@@ -16,8 +16,14 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed(WelcomePage.routeName);
+      Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(WelcomePage.routeName,(route) => false);
     });
+  }
+
+  @override
+  void dispose() {
+
+    super.dispose();
   }
 
   @override

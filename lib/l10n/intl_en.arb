@@ -8,5 +8,9 @@
   "register": "Register",
   "displayName": "Display Name",
   "doesHaveAccount": "Does have account ?",
-  "termsAndCondition": "When you click login, the default is deemed to agree to the Privacy Policy and Terms and Conditions"
+  "termsAndCondition": "When you click login, the default is deemed to agree to the Privacy Policy and Terms and Conditions",
+  "helloThere": "Hello there",
+  "pleaseEnterUsernameEmailAndPassWordToSignIn": "Please enter username/email and password to sign in",
+  "rememberMe": "Remember me",
+  "orContinueWith": "or continue with"
 }

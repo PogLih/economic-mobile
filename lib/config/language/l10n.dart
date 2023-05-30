@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'intl/messages_all.dart';
+import '../intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin
@@ -55,86 +55,6 @@ class S {
     return Intl.message(
       'Login',
       name: 'login',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email`
-  String get email {
-    return Intl.message(
-      'Email',
-      name: 'email',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password`
-  String get password {
-    return Intl.message(
-      'Password',
-      name: 'password',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot password`
-  String get forgotPassword {
-    return Intl.message(
-      'Forgot password',
-      name: 'forgotPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Does not have account ?`
-  String get doesNotHaveAccount {
-    return Intl.message(
-      'Does not have account ?',
-      name: 'doesNotHaveAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Register`
-  String get register {
-    return Intl.message(
-      'Register',
-      name: 'register',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Display Name`
-  String get displayName {
-    return Intl.message(
-      'Display Name',
-      name: 'displayName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Does have account ?`
-  String get doesHaveAccount {
-    return Intl.message(
-      'Does have account ?',
-      name: 'doesHaveAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `When you click login, the default is deemed to agree to the Privacy Policy and Terms and Conditions`
-  String get termsAndCondition {
-    return Intl.message(
-      'When you click login, the default is deemed to agree to the Privacy Policy and Terms and Conditions',
-      name: 'termsAndCondition',
       desc: '',
       args: [],
     );

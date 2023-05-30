@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
-import '../../../data/models/models.dart';
+import '../../data/models/models.dart';
 
 class RegisterState extends Equatable {
   final FormzStatus status;

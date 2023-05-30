@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:economic/blocs/register/register_event.dart';
 import 'package:economic/data/repository/user_repository/user_repository.dart';
-import 'package:economic/presentation/register/bloc/register_event.dart';
-import 'package:economic/presentation/register/bloc/register_state.dart';
+import 'package:economic/blocs/register/register_state.dart';
 import 'package:formz/formz.dart';
 
-import '../../../data/models/models.dart';
-import '../../../data/models/user.dart';
+import '../../data/models/models.dart';
+import '../../data/models/user.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({required UserRepository userRepository})
@@ -70,11 +70,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           password: state.password.value,
           displayname: state.displayName.value,
         );
-        // if (rs != User.empty) {
-        //   emit(state.copyWith(status: FormzStatus.submissionSuccess));
-        // }else{
+        if (rs != User.empty) {
+          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        }else{
           emit(state.copyWith(status: FormzStatus.submissionFailure));
-        // }
+        }
       } catch (ex) {
         print(ex.toString());
         emit(state.copyWith(status: FormzStatus.submissionFailure));

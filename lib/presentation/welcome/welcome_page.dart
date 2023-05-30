@@ -1,7 +1,9 @@
-import 'package:economic/presentation/login/view/login_page.dart';
-import 'package:economic/presentation/register/view/register_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../login/login_page.dart';
+import '../register/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
   static const String routeName = '/welcome';

@@ -1,14 +1,18 @@
-import 'package:economic/common/route.dart';
-import 'package:economic/presentation/login/view/login_page.dart';
-import 'package:economic/presentation/register/bloc/register_event.dart';
+
+import 'package:economic/blocs/login/login_bloc.dart';
 import 'package:economic/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../bloc/register_bloc.dart';
-import '../bloc/register_state.dart';
+import '../../blocs/login/login_event.dart';
+import '../../blocs/register/register_bloc.dart';
+import '../../blocs/register/register_event.dart';
+import '../../blocs/register/register_state.dart';
+import '../../common/contants/assets.dart';
+import '../../widget/input_text_field_widget.dart';
+import '../login/login_page.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -34,7 +38,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   //   Navigator.of(context).pushNamed(LoginPage.routeName
                   //   );
                   // }else if(state.status == FormzStatus.submissionFailure){
-                    UI_utils.showErrorFlushBar(context,'a');
+                  //   UI_utils.showErrorFlushBar(context,'a');
                   // }
                 },
                 builder: (context, state) {
@@ -44,7 +48,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         children: <Widget>[
                           SizedBox(
                             height: MediaQuery.of(context).size.height/4,
-                            child: Image.asset('assets/dragon-icon.png'),
+                            child: Image.asset(appLogo),
                           ),
                           Container(
                             alignment: Alignment.center,
@@ -57,23 +61,31 @@ class _RegisterFormState extends State<RegisterForm> {
                                   fontSize: 30),
                             ),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(10),
-                            child: TextField(
-                              style: const TextStyle(color: Colors.black),
-                              onChanged: (username) {
-                                context
-                                    .read<RegisterBloc>()
-                                    .add(RegisterUsernameChanged(username));
-                              },
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: AppLocalizations.of(context)!.email,
-                              ),
-                            ),
-                          ),
+                          InputTextField(
+                            text: AppLocalizations.of(context)!.email,
+                            controller: nameController,
+                            onValueChanged: (value) {
+                            context
+                                .read<RegisterBloc>()
+                                .add(RegisterUsernameChanged(value));
+                          },),
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   padding: const EdgeInsets.all(10),
+                          //   child: TextField(
+                          //     style: const TextStyle(color: Colors.black),
+                          //     onChanged: (username) {
+                          //       context
+                          //           .read<RegisterBloc>()
+                          //           .add(RegisterUsernameChanged(username));
+                          //     },
+                          //     controller: nameController,
+                          //     decoration: InputDecoration(
+                          //       border: OutlineInputBorder(),
+                          //       labelText: AppLocalizations.of(context)!.email,
+                          //     ),
+                          //   ),
+                          // ),
                           Container(
                             padding: const EdgeInsets.all(10),
                             child: TextField(

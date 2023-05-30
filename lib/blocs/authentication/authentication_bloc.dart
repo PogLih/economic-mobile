@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import '../../../data/models/user.dart';
-import '../../../data/repository/user_repository/user_repository.dart';
-import '../../../data/repository/authentication_repository/authentication_repository.dart';
+import '../../data/models/user.dart';
+import '../../data/repository/user_repository/user_repository.dart';
+import '../../data/repository/authentication_repository/authentication_repository.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 

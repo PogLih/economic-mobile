@@ -1,12 +1,11 @@
-import 'package:economic/presentation/view/welcome_page.dart';
+import 'package:economic/presentation/welcome/welcome_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../presentation/view/home.dart' as oldHome;
-import '../presentation/login/view/login_page.dart';
-import '../presentation/register/view/register_page.dart';
-import '../presentation/homePage/view/home_page.dart';
-import '../presentation/view/splash_page.dart';
-
+import '../presentation/login/login_page.dart';
+import '../presentation/homePage/home.dart' as oldHome;
+import '../presentation/register/register_page.dart';
+import '../presentation/homePage/home_page.dart';
+import '../presentation/splash/splash_page.dart';
 final routes = {
   LoginPage.routeName: (context) => LoginPage(),
   RegisterPage.routeName: (context) => RegisterPage(),

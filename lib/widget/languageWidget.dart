@@ -2,7 +2,7 @@ import 'package:economic/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../config/localeProvider.dart';
+import '../../config/language/localeProvider.dart';
 
 class LanguageWidget extends StatelessWidget {
   @override

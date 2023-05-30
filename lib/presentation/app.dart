@@ -1,22 +1,20 @@
-import 'package:economic/config/themeManager.dart';
-import 'package:economic/config/localeProvider.dart';
-import 'package:economic/config/themeProvider.dart';
+import 'package:economic/config/theme/themeManager.dart';
+import 'package:economic/config/language/localeProvider.dart';
+import 'package:economic/config/theme/themeProvider.dart';
 import 'package:economic/data/repository/user_repository/user_repository.dart';
 import 'package:economic/l10n/l10n.dart';
-import 'package:economic/presentation/register/bloc/register_bloc.dart';
-import 'package:economic/presentation/view/splash_page.dart';
-import 'package:economic/presentation/view/welcome_page.dart';
+import 'package:economic/blocs/register/register_bloc.dart';
+import 'package:economic/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import '../../blocs/authentication/authentication_state.dart';
 import '../../common/route.dart';
 import '../../data/repository/authentication_repository/authentication_repository.dart';
-import '../authentication/bloc/authentication_bloc.dart';
-import '../authentication/bloc/authentication_state.dart';
-import '../login/view/login_page.dart';
-import 'home.dart';
+import '../../blocs/authentication/authentication_bloc.dart';
+import 'homePage/home.dart';
 
 class App extends StatefulWidget {
   const App(

@@ -49,6 +49,9 @@ dependencies:
   hive_flutter: ^1.1.0
   firebase_core: ^2.10.0
   firebase_messaging: ^14.4.1
+  google_sign_in: ^6.1.2
+  firebase_auth: ^4.6.1
+  freezed: ^2.3.4
 dev_dependencies:
 
     # The "flutter_lints" package below contains a set of recommended lints to
@@ -74,6 +77,7 @@ flutter:
     - lib/l10n/intl_en.arb
     - lib/l10n/intl_vi.arb
     - assets/
+    - assets/img/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -97,3 +101,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+  generated_file: lib/l10n/generated/i18n.dart

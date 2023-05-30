@@ -1,5 +1,5 @@
 
-import '../../../data/repository/authentication_repository/authentication_repository.dart';
+import '../../data/repository/authentication_repository/authentication_repository.dart';
 
 abstract class AuthenticationEvent {
   const AuthenticationEvent();
