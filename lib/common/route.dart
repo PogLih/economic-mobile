@@ -1,10 +1,11 @@
+import 'package:economic/presentation/dashboard/dashboard_page.dart';
+import 'package:economic/presentation/explore/explore_page.dart';
 import 'package:economic/presentation/welcome/welcome_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../presentation/login/login_page.dart';
-import '../presentation/homePage/home.dart' as oldHome;
-import '../presentation/register/register_page.dart';
+import '../presentation/dashboard/dashboard.dart';
 import '../presentation/homePage/home_page.dart';
+import '../presentation/login/login_page.dart';
+import '../presentation/register/register_page.dart';
 import '../presentation/splash/splash_page.dart';
 final routes = {
   LoginPage.routeName: (context) => LoginPage(),
@@ -12,7 +13,8 @@ final routes = {
   HomePage.routeName: (context) => HomePage(),
   WelcomePage.routeName: (context) => WelcomePage(),
   SplashPage.routeName: (context) => SplashPage(),
-  oldHome.HomePage.routeName: (context) => oldHome.HomePage(),
+  DashBoard.routeName:(context) => DashboardPage(),
+  ExplorePage.routeName:(context) => ExplorePage(),
 };
 
 Route<void> splashRoute() {

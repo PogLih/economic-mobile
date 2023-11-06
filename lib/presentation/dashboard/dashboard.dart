@@ -1,7 +1,4 @@
 import 'package:economic/config/theme/themeProvider.dart';
-import 'package:economic/presentation/dashboard/dashboard.dart';
-import 'package:economic/presentation/explore/explore_page.dart';
-import 'package:economic/presentation/login/login_page.dart';
 import 'package:economic/widget/bottom_custom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,32 +9,23 @@ import '../../common/Contants/common.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../widget/languageWidget.dart';
-import '../register/register_page.dart';
-class Home extends StatefulWidget {
-  static const String routeName = '/index';
+class DashBoard extends StatelessWidget {
+  static const String routeName = '/dashboard';
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   final userBox = Hive.box(AUTHENTICATION_BOX);
-  var index=0;
+
   @override
   Widget build(BuildContext context) {
-    final screens = [DashBoard(),ExplorePage(),RegisterPage(),LoginPage()];
-    return Scaffold(
-      appBar: AppBar(actions: [
-        LanguagePickerWidget(),ModeToggleButton()
-      ],),
-      body: screens[index],
-      bottomNavigationBar: BottomCustomNavigationBar(
-          index: index,
-          onIndexSelected: (selectedIndex) {
-          setState(() {
-            index = selectedIndex;
-          });
-      }),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.login,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24),
+        ),
+      ],
     );
   }
 }

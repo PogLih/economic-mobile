@@ -4,7 +4,6 @@ import 'package:economic/config/theme/themeProvider.dart';
 import 'package:economic/data/repository/user_repository/user_repository.dart';
 import 'package:economic/l10n/l10n.dart';
 import 'package:economic/blocs/register/register_bloc.dart';
-import 'package:economic/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +13,7 @@ import '../../blocs/authentication/authentication_state.dart';
 import '../../common/route.dart';
 import '../../data/repository/authentication_repository/authentication_repository.dart';
 import '../../blocs/authentication/authentication_bloc.dart';
-import 'homePage/home.dart';
+import 'homePage/home_page.dart';
 
 class App extends StatefulWidget {
   const App(
@@ -36,11 +35,6 @@ class _AppState extends State<App> {
     widget.authenticationRepository.dispose();
     super.dispose();
   }
-  // @override
-  // void initState() {
-  //   Provider.of<LocaleProvider>(context, listen: false);
-  //   super.initState();
-  // }
   static final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
@@ -91,7 +85,6 @@ class _AppState extends State<App> {
             GlobalWidgetsLocalizations.delegate
           ],
           supportedLocales: L10n.all,
-          // localizationsDelegate:const [],
           onGenerateRoute: (_) => splashRoute(),
           navigatorKey: _navigatorKey,
           routes: routes,
@@ -104,12 +97,12 @@ class _AppState extends State<App> {
                     break;
                   case AuthenticationStatus.unauthenticated:
                     _navigator.pushNamedAndRemoveUntil(
-                      SplashPage.routeName,
+                      HomePage.routeName,
                       (route) => false,
                     );
                     break;
                   case AuthenticationStatus.unknown:
-                    _navigator.pushNamed(SplashPage.routeName);
+                    _navigator.pushNamed(HomePage.routeName);
                     break;
                 }
               },
